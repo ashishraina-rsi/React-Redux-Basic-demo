@@ -3,7 +3,6 @@ const initialStore = {
 }
 
 const reducer = (state=initialStore, action) => {
-    console.log("reducer triggered:", action);
     if(action.type === 'INCREMENT'){
         return ({
             ...state,

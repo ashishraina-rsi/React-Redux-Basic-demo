@@ -6,14 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { createStore, applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './store/reducer';
+import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const customMiddleWare = store => next => action => {
-  console.log("Middleware triggered:", action);
+  console.log("customMiddleware => Middleware triggered:", action);
   next(action);
 }
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(customMiddleWare)))
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(customMiddleWare, createLogger())))
 
 ReactDOM.render(
   <React.StrictMode>
