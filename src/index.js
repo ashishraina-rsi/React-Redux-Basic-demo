@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore} from 'redux';
+import { createStore, applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './store/reducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(reducer, composeWithDevTools());
+const customMiddleWare = store => next => action => {
+  console.log("Middleware triggered:", action);
+  next(action);
+}
+
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(customMiddleWare)))
 
 ReactDOM.render(
   <React.StrictMode>
