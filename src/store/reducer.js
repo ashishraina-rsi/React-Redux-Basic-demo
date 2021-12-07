@@ -3,8 +3,6 @@ const initialStore = {
 }
 
 const reducer = (state=initialStore, action) => {
-    debugger
-    console.dir(action)
     if(action.type === 'INCREMENT'){
         return ({
             ...state,

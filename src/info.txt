@@ -1,0 +1,5 @@
+https://medium.com/@samueldinesh/setting-up-redux-devtools-a-simple-guide-3b386a6254fa
+
+https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
+
+https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en
