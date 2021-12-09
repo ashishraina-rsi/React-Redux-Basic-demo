@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore, applyMiddleware} from 'redux';
+import { createStore, combineReducers,  applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './store/reducer';
+import CounterReducer from './store/reducers/counter';
+import PersonReducer from './store/reducers/person';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
@@ -14,7 +15,9 @@ const customMiddleWare = store => next => action => {
   next(action);
 }
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(customMiddleWare, createLogger())))
+const RootReducers = combineReducers({CounterReducer,PersonReducer});
+
+const store = createStore(RootReducers, composeWithDevTools(applyMiddleware(customMiddleWare, createLogger())))
 
 ReactDOM.render(
   <React.StrictMode>
