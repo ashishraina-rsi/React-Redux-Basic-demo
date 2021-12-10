@@ -9,6 +9,7 @@ import CounterReducer from './store/reducers/counter';
 import PersonReducer from './store/reducers/person';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk'
 
 const customMiddleWare = store => next => action => {
   console.log("customMiddleware => Middleware triggered:", action);
@@ -17,7 +18,7 @@ const customMiddleWare = store => next => action => {
 
 const RootReducers = combineReducers({CounterReducer,PersonReducer});
 
-const store = createStore(RootReducers, composeWithDevTools(applyMiddleware(customMiddleWare, createLogger())))
+const store = createStore(RootReducers, composeWithDevTools(applyMiddleware(customMiddleWare, createLogger(), thunk)))
 
 ReactDOM.render(
   <React.StrictMode>

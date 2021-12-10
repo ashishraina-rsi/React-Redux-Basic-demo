@@ -1,23 +1,51 @@
-import React from 'react'
-import { useSelector , useDispatch} from 'react-redux'
-import * as actionTypes from '../store/actions'
+import React , { Component } from 'react';
+import * as actionTypes from '../store/actions';
+import { connect } from 'react-redux';
+class Personlist extends Component {
 
-const Personlist = () => {
-    const personList = useSelector(state => state.PersonReducer.personList)
-    const dispatch = useDispatch()
-    return (
-        <div>
-            <button onClick={() => dispatch({ type: actionTypes.ADD_PERSON})}> Add Random Person </button>
-            
-            <h2>PersonList : </h2>
-            {(personList.length > 0) && personList.map((item, index) => {
-                return <p key={index}>{item}</p>
-            })}
+    onClickHandler = () => {
+        console.log('clicked for API');
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(data => {
+            return data.json();
+        }).then(post => {
+            console.log(post)
+            this.props.clickHandler(post)
+        })
+       
+    }
 
-            {personList.length === 0 && <p>No person in the list!!</p>  }
-        </div>
-
-    )
+    render(){
+        return (
+            <div>
+                <button onClick={this.onClickHandler}> Add Random Person </button>
+                
+                <h2>PersonList : </h2>
+                {(this.props.personList.length > 0) && this.props.personList.map((item, index) => {
+                    return (
+                        <div key={index} style={{display: 'inline-block', border: '1px solid grey', backgroundColor:'lightseagreen', padding:'5px', margin: '10px'}}>
+                        <p>{item.name}</p>
+                        </div>
+                    )
+                })}
+    
+                {this.props.personList.length === 0 && <p>No person in the list!!</p>  }
+            </div>
+        )
+    }
+    
 }
 
-export default Personlist
+const mapStateToProps = (state) => {
+    return {
+        personList :  state.PersonReducer.personList
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        clickHandler : (x) => dispatch({type : actionTypes.ADD_PERSON, payload : x})
+    }
+}
+    
+export default connect(mapStateToProps, mapDispatchToProps)(Personlist)
