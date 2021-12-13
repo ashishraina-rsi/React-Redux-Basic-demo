@@ -7,18 +7,18 @@ import { createStore, combineReducers,  applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
 import CounterReducer from './store/reducers/counter';
 import PersonReducer from './store/reducers/person';
-import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk'
+import createSagaMiddleware from 'redux-saga';
+import personSaga from './redux-sagas/sagas';
 
-const customMiddleWare = store => next => action => {
-  console.log("customMiddleware => Middleware triggered:", action);
-  next(action);
-}
+
+const sagaMiddleware = createSagaMiddleware();
 
 const RootReducers = combineReducers({CounterReducer,PersonReducer});
 
-const store = createStore(RootReducers, composeWithDevTools(applyMiddleware(customMiddleWare, createLogger(), thunk)))
+const store = createStore(RootReducers, composeWithDevTools(applyMiddleware(sagaMiddleware )))
+
+sagaMiddleware.run(personSaga);
 
 ReactDOM.render(
   <React.StrictMode>

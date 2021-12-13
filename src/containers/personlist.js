@@ -1,24 +1,25 @@
 import React , { Component } from 'react';
 import * as actionTypes from '../store/actions';
 import { connect } from 'react-redux';
+
 class Personlist extends Component {
 
-    onClickHandler = () => {
-        console.log('clicked for API');
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then(data => {
-            return data.json();
-        }).then(post => {
-            console.log(post)
-            this.props.clickHandler(post)
-        })
+    // onClickHandler = () => {
+    //     console.log('clicked for API');
+    //     fetch('https://jsonplaceholder.typicode.com/users')
+    //     .then(data => {
+    //         return data.json();
+    //     }).then(post => {
+    //         console.log(post)
+    //         this.props.clickHandler(post)
+    //     })
        
-    }
+    // }
 
     render(){
         return (
             <div>
-                <button onClick={this.onClickHandler}> Add Random Person </button>
+                <button onClick={this.props.clickHandler}> Add Random Person </button>
                 
                 <h2>PersonList : </h2>
                 {(this.props.personList.length > 0) && this.props.personList.map((item, index) => {
@@ -28,7 +29,6 @@ class Personlist extends Component {
                         </div>
                     )
                 })}
-    
                 {this.props.personList.length === 0 && <p>No person in the list!!</p>  }
             </div>
         )
@@ -44,7 +44,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        clickHandler : (x) => dispatch({type : actionTypes.ADD_PERSON, payload : x})
+        clickHandler : () => dispatch({type : actionTypes.ADD_PERSON_LOADING})
     }
 }
     
