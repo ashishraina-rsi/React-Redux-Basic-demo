@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '../components/Button'
-import * as actionTypes from '../store/actions'
+import * as actionTypes from '../store/actions/actionTypes'
 
 export class Counter extends Component {
     render() {

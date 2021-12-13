@@ -1,21 +1,8 @@
 import React , { Component } from 'react';
-import * as actionTypes from '../store/actions';
+import * as actionTypes from '../store/actions/actionTypes';
 import { connect } from 'react-redux';
 
 class Personlist extends Component {
-
-    // onClickHandler = () => {
-    //     console.log('clicked for API');
-    //     fetch('https://jsonplaceholder.typicode.com/users')
-    //     .then(data => {
-    //         return data.json();
-    //     }).then(post => {
-    //         console.log(post)
-    //         this.props.clickHandler(post)
-    //     })
-       
-    // }
-
     render(){
         return (
             <div>

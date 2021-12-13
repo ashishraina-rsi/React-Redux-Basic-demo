@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import { ADD_PERSON_LOADING, ADD_PERSON } from "../store/actions";
+import { ADD_PERSON_LOADING, ADD_PERSON } from "../store/actions/actionTypes";
 
 const fetchData = async() => {
    const response = await fetch('https://jsonplaceholder.typicode.com/users')
